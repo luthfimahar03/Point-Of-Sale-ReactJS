@@ -26,7 +26,7 @@ export const getAll = async (click) => {
 export const getProductById = (productid) => {
     return {
         type: 'GET_PRODUCT_BY_ID',
-        payload: Axios.get(`http://localhost:4000/products/${productid}`,{
+        payload: Axios.get(`http://localhost:5000/products/${productid}`,{
           
         })
     }

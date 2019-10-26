@@ -3,13 +3,14 @@ import jquery from 'jquery'
 import {connect} from "react-redux"
 import {addProduct} from "../publics/actions/products"
 
+
 class AddProducts extends Component {
 
 
     handleSubmit = async (event) => {
         event.preventDefault()
         const data = new FormData(event.target)
-        fetch("http://localhost:5000/products",
+        fetch(`http://localhost:5000/products`,
             {
                 method: "POST",
                 body: data

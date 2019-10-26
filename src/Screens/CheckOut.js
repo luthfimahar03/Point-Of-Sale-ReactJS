@@ -33,10 +33,7 @@ export default class CheckOut extends Component {
     handleCout = async (event) => {
         event.preventDefault()
         const data = new FormData(event.target)
-        console.log(data.price)
-        console.log(data.id)
-        console.log(data)
-        await axios.post("http://localhost:5000/products/reduce" , data)
+        await axios.post("http://localhost:5000/products/reduce", data)
             .then(res => {
                 console.log(res)
             })
@@ -106,7 +103,7 @@ export default class CheckOut extends Component {
 
                             <div class="modal-footer">
                                 <form onSubmit={this.handleCout}>
-                                <input type="text" name="total" hidden value={this.props.product.reduce((a, c) => (a + c.price * c.count), 0)} />
+                                    <input type="text" name="total" hidden value={this.props.product.reduce((a, c) => (a + c.price * c.count), 0)} />
                                     {this.props.product.map(item => (
                                         <div>
                                             <div>
@@ -114,7 +111,7 @@ export default class CheckOut extends Component {
                                                 <input type="text" name="id" hidden value={item.id} />
                                                 <input type="text" name="price" hidden value={item.price} />
                                                 <input type="text" name="username" hidden value={item.name} />
-                                                
+
                                             </div>
 
 

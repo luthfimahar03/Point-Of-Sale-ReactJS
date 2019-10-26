@@ -10,8 +10,8 @@ import jquery from 'jquery'
 
 import Add from './Add'
 // import store from '../store'
-import {connect} from "react-redux"
-import { getAll } from '../publics/actions/products' 
+import { connect } from "react-redux"
+import { getAll } from '../publics/actions/products'
 // import {getAllProducts} from "../actions/productActions"
 
 
@@ -21,21 +21,21 @@ class Products extends Component {
   constructor() {
     super();
     this.state = {
-      data: [], 
-      cartItems: [], 
-      filteredProducts: [], 
-      sort: [], 
+      data: [],
+      cartItems: [],
+      filteredProducts: [],
+      sort: [],
       // products: [], 
-      totalData: [], 
-      totalPage: 0, 
-      clicks: 0, 
+      totalData: [],
+      totalPage: 0,
+      clicks: 0,
       page: 1,
       categories: []
     };
     this.handleAddToCart = this.handleAddToCart.bind(this)
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this)
     this.handleSortChange = this.handleSortChange.bind(this)
- 
+
   }
   async componentDidMount() {
     this.getProducts()
@@ -47,7 +47,7 @@ class Products extends Component {
     // console.log('ComponentDidMount', this.state.data)
   }
 
-  async getProducts () {
+  async getProducts() {
     const fetch = await getAll(this.state.clicks)
     this.props.dispatch(fetch)
     console.log(this.props)
@@ -58,7 +58,7 @@ class Products extends Component {
     })
   }
 
-  
+
   getCategories = async () => {
     await axios.get('http://localhost:5000/categories')
       .then(result => {
@@ -70,13 +70,13 @@ class Products extends Component {
   }
 
   nextPage = async () => {
-    if (this.state.page >= this.state.totalPage){
+    if (this.state.page >= this.state.totalPage) {
       this.state.page = this.state.totalPage
     } else {
       this.state.clicks = this.state.clicks + 8
       this.state.page = this.state.page + 1
     }
-    await this.getProducts()  
+    await this.getProducts()
   }
 
   previousPage = async () => {
@@ -159,8 +159,6 @@ class Products extends Component {
     });
   }
 
-
-
   // console.log(product)
 
   // let productAlreadyInCart = this.state.cartItems.find(cart => cart.id == product.id)
@@ -176,15 +174,15 @@ class Products extends Component {
 
   render() {
     return (
-      
+
       <div>
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-9 border">
               <nav class="navbar">
-                <h2 style={{ margin: "auto" }}>Electro</h2>
+                <h2 style={{ margin: "auto" }}>Electro App</h2>
                 <form class="form-inline">
-                  <b><Link to="/Login">Login</Link></b>
+                  <b><Link to="/Login" style={{color: "black"}}>Sign In</Link></b>
                 </form>
               </nav>
             </div>
@@ -199,13 +197,14 @@ class Products extends Component {
             <div class="col-md-1">
               <div class="sidebar">
                 <div class="img_sidebar fa-3x">
-                  <span><Link to="/history"><i class="fa fa-list-alt m-3"></i></Link></span>
+                  <span><Link to="/products"><i class="fa fa-home m-3" style={{ color: "black" }}></i></Link></span>
+                  <span ><Link to="/history"><i class="fa fa-list-alt m-3" style={{ color: "black" }}></i></Link></span>
                   <span data-toggle="modal" data-target="#addData"><i class="fa fa-plus-square m-3"></i></span>
                 </div>
               </div>
 
             </div>
-            <div class="col-md-8 bg-light">
+            <div class="col-md-8 bg-black" style={{color: "black"}} >
               <div style={{ float: "Right", margin: "20px" }}>
                 <ul class="pagination" >
                   <li class="page-item"><a class="page-link" href="#" onClick={() => this.previousPage()}>Previous</a></li>
@@ -218,7 +217,7 @@ class Products extends Component {
 
               <div className="row">
                 <Filter count={this.state.filteredProducts.length} handleSortChange={this.handleSortChange} />
-                <input style={{ height: "37px", marginTop: "25px" }} placeholder="Search" onKeyPress={(e) => this.searchValue(e)}></input>
+                <input style={{ height: "37px", marginTop: "25px", paddingLeft: 10 }} placeholder="Search" onKeyPress={(e) => this.searchValue(e)}></input>
               </div>
               <div style={{ paddingTop: "30px" }}>
                 <ProductList products={this.state.data} handleAddToCart={this.handleAddToCart} />
@@ -235,17 +234,17 @@ class Products extends Component {
         </div>
         <CheckOut product={this.state.cartItems} />
 
-        <Add categories={this.state.categories} /> 
+        <Add categories={this.state.categories} />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     products: state.products
   }
 }
 
 
-export default connect(mapStateToProps)(Products) ;
+export default connect(mapStateToProps)(Products);
