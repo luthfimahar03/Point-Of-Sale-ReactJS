@@ -73,7 +73,7 @@ class Products extends Component {
     if (this.state.page >= this.state.totalPage) {
       this.state.page = this.state.totalPage
     } else {
-      this.state.clicks = this.state.clicks + 8
+      this.state.clicks = this.state.clicks + 3
       this.state.page = this.state.page + 1
     }
     await this.getProducts()

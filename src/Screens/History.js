@@ -27,8 +27,6 @@ class Revenue extends Component {
     async componentDidMount() {
         await this.handleTable()
         await this.handleIncome()
-
-        // this.handleRevenue()
     }
 
 
@@ -56,7 +54,7 @@ class Revenue extends Component {
     handleIncome = async () => {
         await Axios.get("http://localhost:5000/order/getIncome")
             .then(result => {
-                console.log(result)
+                // console.log(result)
                 this.setState({
                     yesterday: result.data.data[0].yesterday,
                     daynow: result.data.data[0].daynow,
@@ -91,9 +89,9 @@ class Revenue extends Component {
                             <div class="col-md-1" style={{ paddingLeft: "35px" }}>
                                 <div class="sidebar">
                                     <div class="img_sidebar fa-3x">
-                                        <span><Link to="/products"><i class="fa fa-home m-3" style={{color: "black"}}></i></Link></span>
-                                        <span><Link to="/history"><i class="fa fa-list-alt m-3" style={{color: "black"}}></i></Link></span>
-                                        <span data-toggle="modal" data-target="#addData"><i class="fa fa-plus-square m-3"></i></span>
+                                        <span><Link to="/products"><i class="fa fa-home m-3" style={{ color: "black" }}></i></Link></span>
+                                        <span><Link to="/history"><i class="fa fa-list-alt m-3" style={{ color: "black" }}></i></Link></span>
+                                        {/* <span data-toggle="modal" data-target="#addData"><i class="fa fa-plus-square m-3"></i></span> */}
                                     </div>
                                 </div>
                             </div>
@@ -122,13 +120,14 @@ class Revenue extends Component {
 
                                 <Chart />
                                 <div style={{ marginTop: "80px" }}>
-                                <h2 style={{marginBottom: -20}}>Recent Order</h2>
+                                    <h2 style={{ marginBottom: -20 }}>Recent Order</h2>
                                     <select class="form-control" id="exampleFormControlSelect1" onChange={this.handleTableBy} style={{ float: "right", width: "100px", height: "40px", marginRight: "13px", marginBottom: "10px" }}>
+                                        <option value="">Select</option>
                                         <option value="day">Today</option>
                                         <option value="month">Month</option>
                                         <option value="year">Year</option>
                                     </select>
-                                    <table class="table">      
+                                    <table class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">INVOICES</th>

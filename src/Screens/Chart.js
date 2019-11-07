@@ -17,24 +17,26 @@ class Chart extends Component {
 
   handleRevenue = async (event) => {
     let orderBy = event.target.value
-    let labels = []
-    if (orderBy == "day") {
-      labels = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    } else if (orderBy == "month") {
-      labels = ["June", "July", "August", "September", "October"]
-    } else if (orderBy == "year") {
-      labels = ['2018', '2019']
-    }
+    // console.log(orderBy)
+    // let labels = []
+    // if (orderBy == "day") {
+    //   labels = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    // } else if (orderBy == "month") {
+    //   labels = ["June", "July", "August", "September", "October", "November"]
+    // } else if (orderBy == "year") {
+    //   labels = ['2018', '2019']
+    // }
 
     await Axios.get("http://localhost:5000/order/revenue?orderBy=" + orderBy)
       .then(result => {
+        // console.log(result)
         this.setState({
           chart: result.data.data,
-          labels: labels
+          orderBy: orderBy
         })
       })
-      // console.log(this.state.labels)
-      console.log(orderBy)
+    // console.log(this.state.labels)
+    // console.log(this.state.chart)
 
   }
 
@@ -44,8 +46,40 @@ class Chart extends Component {
       incomes.push(item.income)
     })
 
-    // let labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    // let day =  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    // get day
+    let day = []
+    console.log(day)
+    this.state.chart.forEach(days => {
+      day.push(days.dayname)
+    })
+    
+    // get month
+    let month = []
+    this.state.chart.forEach(months => {
+      month.push(months.monthname)
+      // console.log(day)
+    })
+
+    // get year
+    let year = []
+    // console.log(day)
+    this.state.chart.forEach(years => {
+      year.push(years.year)
+      // console.log(day)
+    })
+
+    
+    if (this.state.orderBy === 'week') {
+      // console.log(day)
+      this.state.labels = day
+    } else if (this.state.orderBy === 'month') {
+      this.state.labels = month
+      // console.log(month)
+    } else {
+      this.state.labels = year
+      // console.log(year)
+    }
+
     const data = {
 
       labels: this.state.labels,
@@ -78,7 +112,8 @@ class Chart extends Component {
         <div style={{ marginTop: "30px" }}>
           <h2 style={{ marginBottom: "-35px" }}>Revenue</h2>
           <select class="form-control" id="exampleFormControlSelect1" onChange={this.handleRevenue} style={{ float: "right", width: "100px", height: "40px", marginRight: "13px" }}>
-            <option value="day">Today</option>
+          <option value="">Select</option>
+            <option value="week">Week</option>
             <option value="month">Month</option>
             <option value="year">Year</option>
           </select>

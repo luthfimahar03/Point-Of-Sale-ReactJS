@@ -4,6 +4,7 @@ import '../Assets/css/Login.css'
 import { Link } from 'react-router-dom'
 import LocalStorage from 'local-storage'
 import Axios from 'axios';
+import {BASE_URL} from 'dotenv'
 
 
 
@@ -17,9 +18,8 @@ class Login extends Component {
     event.preventDefault()
     const data = new FormData(event.target)
     console.log(data)
-    Axios.post("http://localhost:5000/users/login", data)
-    
-
+    Axios.post(`${BASE_URL}/users/login`, data)
+  
     .then(res => {
       if(res.status === 200){
         LocalStorage.set('token', (res.data.token))

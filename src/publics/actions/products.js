@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 
 export const getAll = async (click) => {
-    const result = await Axios.get(`http://localhost:5000/products?limit=8&page=${click}`)
+    const result = await Axios.get(`http://localhost:5000/products?limit=3&page=${click}`)
     console.log(result)
     return {
         type: 'GET_PRODUCTS_FULFILLED',
