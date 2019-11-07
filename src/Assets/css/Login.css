@@ -1,5 +1,5 @@
 .bg{
-  background: url('../img/nikita-kachanovsky-OVbeSXRk_9E-unsplash.jpg') no-repeat;
+  /* background: url('../img/nikita-kachanovsky-OVbeSXRk_9E-unsplash.jpg') no-repeat; */
   width: 100%;
   height: 100vh;
   background-size: 100%
@@ -21,7 +21,7 @@
 }
 
 .modal-container {
-  background-color: #434e43;
+  /* background-color: #dff9fb; */
   opacity: .8;
 
 }
