@@ -11,7 +11,7 @@
     "jquery": "^3.4.1",
     "local-storage": "^2.0.0",
     "mdbootstrap": "^4.8.10",
-    "next": "^9.0.5",
+    "next": "^11.1.0",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-chartjs-2": "^2.8.0",
